@@ -1,0 +1,329 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Fundo branco puro */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative; /* Adicionado para posicionamento de elementos filhos */
+}
+
+#background-gif {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Garante que o GIF fique atrás do conteúdo */
+    object-fit: cover; /* Ajusta o GIF para cobrir toda a área, cortando se necessário */
+    filter: brightness(0.6); /* Escurece o GIF para melhor contraste */
+}
+
+/* Removido o estilo original do #background-video, pois foi substituído por #background-gif */
+/*
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    object-fit: cover; 
+    filter: brightness(0.6); 
+}
+*/
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Coloca o overlay acima do vídeo mas abaixo do conteúdo */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 50%); /* Degradê preto, mais escuro embaixo */
+    opacity: 0.8; /* Transparência ajustada para 20% (opacidade de 80%) */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 1; /* Garante que o conteúdo fique na frente do vídeo */
+    position: relative; /* Necessário para z-index funcionar */
+}
+
+h1 {
+    font-family: 'EB Garamond', Georgia, serif; /* Fonte serifada clássica */
+    font-weight: normal;
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.8); /* Gradiente leve ou tonalidade clara (off-white ou bege claro) com leve transparência */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Sombra de texto mais sutil e brilhante */
+    margin-bottom: 20px; /* Ajustado para espaçamento mais justo */
+    background: linear-gradient(to right, rgba(255, 240, 200, 0.9), rgba(255, 220, 160, 0.7)); /* Gradiente dourado-claro */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.search-bar {
+    width: 600px; /* Aumenta a largura da barra de busca */
+    height: 60px; /* Aumenta a altura para melhor proporção */
+    border-radius: 8px; /* Levemente arredondado */
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro com 60% de opacidade */
+    border: 0.5px solid rgba(255, 240, 200, 0.2); /* Borda muito fina e sutil, dourada clara */
+    display: flex;
+    align-items: center;
+    padding: 0 20px; /* Aumentado o padding direito para dar mais espaço ao ícone */
+    backdrop-filter: blur(4px); /* Aumenta o blur para melhor transparência */
+    filter: brightness(1.1); /* Mantém o brilho */
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8); /* Cor do texto mais clara */
+    font-size: 20px; /* Aumenta o tamanho da fonte do input */
+    font-family: 'EB Garamond', Georgia, serif; /* Definindo a fonte para input */
+    margin-right: 10px; /* Adicionado para criar espaço entre o input e o ícone */
+}
+
+.search-bar input::placeholder {
+    color: rgba(255, 240, 200, 0.3); /* Placeholder com opacidade reduzida */
+    font-family: 'EB Garamond', Georgia, serif; /* Aplica a mesma fonte do título */
+}
+
+.search-icon {
+    width: 24px; /* Aumentado para corresponder ao viewBox do SVG */
+    height: 24px; /* Aumentado para corresponder ao viewBox do SVG */
+    min-width: 24px; /* Garantindo que o ícone não diminua */
+    display: flex; /* Usando flexbox para centralizar o SVG */
+    justify-content: center; /* Centralizando o SVG horizontalmente */
+    align-items: center; /* Centralizando o SVG verticalmente */
+    color: rgba(255, 240, 200, 0.7); /* Cor dourada clara para o ícone */
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.devocional-button {
+    margin-top: 30px; /* Aumentei o espaçamento para o botão */
+    padding: 12px 25px; /* Preenchimento interno um pouco menor */
+    background-color: transparent; /* Fundo transparente */
+    border: 0.5px solid rgba(255, 240, 200, 0.3); /* Borda muito fina e sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    color: rgba(255, 240, 200, 0.9); /* Cor do texto dourada clara */
+    font-family: 'EB Garamond', Georgia, serif; /* Mesma fonte do título */
+    font-size: 18px; /* Tamanho da fonte levemente menor para mais elegância */
+    cursor: pointer; /* Cursor de mão ao passar por cima */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+    box-shadow: 0 0 10px rgba(255, 240, 200, 0.05); /* Sombra suave para um efeito de brilho */
+    backdrop-filter: blur(4px); /* Efeito de blur */
+}
+
+.devocional-button:hover {
+    background-color: rgba(255, 240, 200, 0.05); /* Leve fundo dourado no hover */
+    border-color: rgba(255, 240, 200, 0.5); /* Borda mais visível no hover */
+    color: rgba(255, 255, 255, 1); /* Texto branco no hover */
+    box-shadow: 0 0 15px rgba(255, 240, 200, 0.2); /* Sombra mais intensa no hover */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Disable scroll */
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+    flex-direction: column; /* Changed to column to stack title and content vertically */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker than search bar */
+    border: 1px solid rgba(200, 180, 100, 0.7); /* Similar border as search bar */
+    border-radius: 8px;
+    padding: 30px;
+    width: 80%; /* Adjust width as needed */
+    max-width: 700px;
+    position: relative;
+    color: rgba(255, 255, 255, 0.9); /* Lighter text for content */
+    font-family: 'EB Garamond', Georgia, serif; /* Changed to match title font */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out content and reference */
+    max-height: 90vh; /* Limit height to prevent overflow */
+    overflow-y: auto; /* Enable vertical scroll only if content exceeds max-height */
+}
+
+.modal-body {
+    margin-bottom: 20px; /* Space between body and reference */
+}
+
+.modal-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: rgba(255, 240, 200, 0.9); /* Same as verse text for consistency */
+    text-align: center;
+}
+
+.verse-text {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 24px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: rgba(255, 240, 200, 0.9); /* Lighter gold for verse */
+}
+
+.explanation-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.reference-text {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    text-align: right;
+    color: rgba(200, 180, 100, 0.9); /* Gold for reference */
+}
+
+.close-button {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+} 
+
+/* Estilos específicos para o modal do Devocional */
+.devocional-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: rgba(255, 240, 200, 0.9); /* Mesma cor do título do modal original */
+    text-align: center;
+}
+
+.devocional-content {
+    font-size: 18px;
+    line-height: 1.8; /* Aumentado para melhor espaçamento entre as linhas */
+    color: rgba(255, 240, 200, 0.9); /* Alterado para o tom amarelado/dourado */
+    margin-bottom: 15px; /* Espaçamento abaixo do conteúdo */
+}
+
+.devocional-date {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    text-align: right;
+    color: rgba(200, 180, 100, 0.9); /* Mesma cor da referência do modal original */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        width: 90%; /* Make search bar more flexible */
+        height: 50px;
+        padding: 0 10px;
+    }
+
+    .search-bar input {
+        font-size: 16px;
+    }
+
+    .search-icon {
+        /* margin-left: 8px; Removido para consistência */
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        max-height: 85vh; /* Adjust modal height for smaller screens */
+    }
+
+    .verse-text {
+        font-size: 20px;
+    }
+
+    .explanation-text {
+        font-size: 16px;
+    }
+
+    .reference-text {
+        font-size: 14px;
+    }
+
+    .close-button {
+        font-size: 24px;
+        top: 5px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .search-bar {
+        width: 95%;
+        height: 45px;
+        padding: 0 8px;
+    }
+
+    .search-bar input {
+        font-size: 14px;
+    }
+
+    .search-icon {
+        /* margin-left: 5px; Removido para consistência */
+    }
+
+    .modal-content {
+        padding: 15px;
+        max-height: 80vh;
+    }
+
+    .verse-text {
+        font-size: 18px;
+    }
+
+    .explanation-text {
+        font-size: 14px;
+    }
+
+    .reference-text {
+        font-size: 12px;
+    }
+
+    .close-button {
+        font-size: 20px;
+        top: 3px;
+        right: 10px;
+    }
+} 
