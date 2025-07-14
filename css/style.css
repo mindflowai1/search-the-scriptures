@@ -124,12 +124,7 @@ h1 {
     backdrop-filter: blur(4px); /* Efeito de blur */
 }
 
-.devocional-button:hover {
-    background-color: rgba(255, 240, 200, 0.05); /* Leve fundo dourado no hover */
-    border-color: rgba(255, 240, 200, 0.5); /* Borda mais visível no hover */
-    color: rgba(255, 255, 255, 1); /* Texto branco no hover */
-    box-shadow: 0 0 15px rgba(255, 240, 200, 0.2); /* Sombra mais intensa no hover */
-}
+
 
 /* Modal Styles */
 .modal {
@@ -163,6 +158,11 @@ h1 {
     justify-content: space-between; /* Space out content and reference */
     max-height: 90vh; /* Limit height to prevent overflow */
     overflow-y: auto; /* Enable vertical scroll only if content exceeds max-height */
+    white-space: pre-wrap; /* Mantém quebras de linha e espaços */
+    word-wrap: break-word; /* Quebra palavras longas */
+    line-height: 1.6; /* Espaçamento entre linhas */
+    font-size: 16px; /* Tamanho de fonte adequado */
+    letter-spacing: 0.5px; /* Espaçamento entre letras */
 }
 
 .modal-body {
@@ -180,15 +180,19 @@ h1 {
 .verse-text {
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 24px;
-    margin-bottom: 15px;
-    line-height: 1.5;
+    margin-bottom: 20px;
+    line-height: 1.8;
     color: rgba(255, 240, 200, 0.9); /* Lighter gold for verse */
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .explanation-text {
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.8;
     color: rgba(255, 255, 255, 0.8);
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .reference-text {
@@ -196,6 +200,29 @@ h1 {
     font-size: 16px;
     text-align: right;
     color: rgba(200, 180, 100, 0.9); /* Gold for reference */
+    margin-bottom: 20px; /* Espaço para o botão de compartilhamento */
+}
+
+.share-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    align-self: flex-end;
+    transition: transform 0.2s ease;
+}
+
+.share-button:hover {
+    transform: scale(1.1);
+}
+
+.share-button img {
+    filter: brightness(0) invert(1) sepia(100%) saturate(2000%) hue-rotate(45deg) brightness(1.2); /* Cor dourada desde o início */
+    transition: filter 0.2s ease;
+}
+
+.share-button:hover img {
+    filter: brightness(0) invert(1) sepia(100%) saturate(2000%) hue-rotate(45deg) brightness(1.4); /* Aumenta o brilho ao passar o mouse */
 }
 
 .close-button {

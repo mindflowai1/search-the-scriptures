@@ -175,4 +175,66 @@ document.addEventListener('DOMContentLoaded', function() {
             devotionalModal.style.display = 'none';
         }
     });
+
+    // Adiciona a funcionalidade de copiar texto ao botão de compartilhamento
+    const shareButtons = document.querySelectorAll('.share-button');
+    shareButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Verifica qual modal está aberto
+            const bibleModal = document.getElementById('bibleModal');
+            const devotionalModal = document.getElementById('devotionalModal');
+            let textToCopy = '';
+
+            if (bibleModal.style.display === 'flex') {
+                // Copia o texto do modal bíblico
+                const verseText = bibleModal.querySelector('.verse-text');
+                const explanationText = bibleModal.querySelector('.explanation-text');
+                const referenceText = bibleModal.querySelector('.reference-text');
+                textToCopy = verseText.textContent + '\n\n' + explanationText.textContent + '\n\n' + referenceText.textContent;
+            } else if (devotionalModal.style.display === 'flex') {
+                // Copia todo o conteúdo do modal devocional
+                const devotionalContent = devotionalModal.querySelector('.modal-body');
+                // Obtém todo o HTML do conteúdo, mantendo a formatação
+                textToCopy = devotionalContent.innerHTML
+                    .replace(/<br>/g, '\n') // Converte quebras de linha
+                    .replace(/<strong>(.*?)<\/strong>/g, '*$1*') // Converte negrito para asteriscos
+                    .replace(/<\/p>/g, '\n\n') // Adiciona espaços entre parágrafos
+                    .replace(/<p>/g, '') // Remove tags de parágrafo
+                    .replace(/<[^>]+>/g, ''); // Remove outras tags HTML
+            }
+
+            // Copia o texto
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Exibe a mensagem "Copiado"
+            const copiedMessage = document.createElement('span');
+            copiedMessage.textContent = 'Copiado!';
+            copiedMessage.style.position = 'absolute';
+            copiedMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            copiedMessage.style.color = '#fff';
+            copiedMessage.style.padding = '6px 12px';
+            copiedMessage.style.borderRadius = '4px';
+            copiedMessage.style.fontSize = '14px';
+            copiedMessage.style.right = '100%';
+            copiedMessage.style.marginRight = '10px';
+            copiedMessage.style.top = '50%';
+            copiedMessage.style.transform = 'translateY(-50%)';
+            copiedMessage.style.opacity = '1';
+            copiedMessage.style.transition = 'opacity 0.5s ease';
+            button.appendChild(copiedMessage);
+
+            // Remove a mensagem após 2 segundos
+            setTimeout(() => {
+                copiedMessage.style.opacity = '0';
+                setTimeout(() => {
+                    button.removeChild(copiedMessage);
+                }, 500); // Espera meio segundo após a animação terminar
+            }, 2000);
+        });
+    });
 }); 
