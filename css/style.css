@@ -204,25 +204,22 @@ h1 {
 }
 
 .share-button {
-    background: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #f0e68c;
     border: none;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    padding: 10px;
-    align-self: flex-end;
-    transition: transform 0.2s ease;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .share-button:hover {
-    transform: scale(1.1);
-}
-
-.share-button img {
-    filter: brightness(0) invert(1) sepia(100%) saturate(2000%) hue-rotate(45deg) brightness(1.2); /* Cor dourada desde o início */
-    transition: filter 0.2s ease;
-}
-
-.share-button:hover img {
-    filter: brightness(0) invert(1) sepia(100%) saturate(2000%) hue-rotate(45deg) brightness(1.4); /* Aumenta o brilho ao passar o mouse */
+    background: #ffd700;
 }
 
 .close-button {
