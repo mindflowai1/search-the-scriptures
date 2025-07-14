@@ -146,27 +146,22 @@ h1 {
     background-color: rgba(0, 0, 0, 0.6); /* Slightly darker than search bar */
     border: 1px solid rgba(200, 180, 100, 0.7); /* Similar border as search bar */
     border-radius: 8px;
-    padding: 30px;
     width: 80%; /* Adjust width as needed */
     max-width: 700px;
     position: relative;
     color: rgba(255, 255, 255, 0.9); /* Lighter text for content */
     font-family: 'EB Garamond', Georgia, serif; /* Changed to match title font */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-height: 90vh; /* Limit height to prevent overflow */
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Space out content and reference */
-    max-height: 90vh; /* Limit height to prevent overflow */
-    overflow-y: auto; /* Enable vertical scroll only if content exceeds max-height */
-    white-space: pre-wrap; /* Mantém quebras de linha e espaços */
-    word-wrap: break-word; /* Quebra palavras longas */
-    line-height: 1.6; /* Espaçamento entre linhas */
-    font-size: 16px; /* Tamanho de fonte adequado */
-    letter-spacing: 0.5px; /* Espaçamento entre letras */
 }
 
 .modal-body {
-    margin-bottom: 20px; /* Space between body and reference */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 15px;
 }
 
 .modal-title {
@@ -204,18 +199,17 @@ h1 {
 }
 
 .share-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
     background: #f0e68c;
     border: none;
     color: #000;
-    padding: 8px 16px;
+    padding: 12px 24px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    margin: 20px auto 0;
+    display: block;
 }
 
 .share-button:hover {

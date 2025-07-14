@@ -156,53 +156,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Quando o botão "Devocional Diário" é clicado, exibe o modal do devocional
     devocionalButton.addEventListener('click', displayDailyDevotional);
+    console.log('Event listener para devocionalButton adicionado');
 
     // Quando o botão de fechar (x) do modal bíblico é clicado, fecha-o
     closeButton.addEventListener('click', function() {
         bibleModal.style.display = 'none';
+        console.log('Modal bíblico fechado');
     });
 
     // Quando o botão de fechar (x) do modal devocional é clicado, fecha-o
     devotionalCloseButton.addEventListener('click', function() {
         devotionalModal.style.display = 'none';
+        console.log('Modal devocional fechado');
     });
 
     // Quando o usuário clica em qualquer lugar fora do modal, fecha-o
     window.addEventListener('click', function(event) {
         if (event.target == bibleModal) {
             bibleModal.style.display = 'none';
+            console.log('Modal bíblico fechado por clique fora');
         } else if (event.target == devotionalModal) {
             devotionalModal.style.display = 'none';
+            console.log('Modal devocional fechado por clique fora');
         }
     });
 
     // Adiciona a funcionalidade de copiar texto ao botão de compartilhamento
     const shareButtons = document.querySelectorAll('.share-button');
+    console.log('Número de botões de compartilhar encontrados:', shareButtons.length);
     shareButtons.forEach(button => {
         button.addEventListener('click', function() {
+            console.log('Botão de compartilhar clicado');
             // Verifica qual modal está aberto
             const bibleModal = document.getElementById('bibleModal');
             const devotionalModal = document.getElementById('devotionalModal');
             let textToCopy = '';
 
             if (bibleModal.style.display === 'flex') {
+                console.log('Modal bíblico aberto');
                 // Copia o texto do modal bíblico
                 const verseText = bibleModal.querySelector('.verse-text');
                 const explanationText = bibleModal.querySelector('.explanation-text');
                 const referenceText = bibleModal.querySelector('.reference-text');
                 textToCopy = verseText.textContent + '\n\n' + explanationText.textContent + '\n\n' + referenceText.textContent;
             } else if (devotionalModal.style.display === 'flex') {
-                // Copia todo o conteúdo do modal devocional
-                const devotionalContent = devotionalModal.querySelector('.modal-body');
-                // Obtém todo o HTML do conteúdo, mantendo a formatação
-                textToCopy = devotionalContent.innerHTML
-                    .replace(/<br>/g, '\n') // Converte quebras de linha
-                    .replace(/<strong>(.*?)<\/strong>/g, '*$1*') // Converte negrito para asteriscos
-                    .replace(/<\/p>/g, '\n\n') // Adiciona espaços entre parágrafos
-                    .replace(/<p>/g, '') // Remove tags de parágrafo
-                    .replace(/<[^>]+>/g, ''); // Remove outras tags HTML
+                console.log('Modal devocional aberto');
+                // Obtém os elementos do devocional
+                const devotionalTitle = devotionalModal.querySelector('.devotional-title').textContent;
+                const devotionalContent = devotionalModal.querySelector('.devotional-content').textContent;
+                
+                // Formata o texto com uma estrutura clara e legível
+                textToCopy = `
+${devotionalTitle}\n\n
+${devotionalContent}\n\n
+Compartilhado através do Search the Scriptures`;
             }
 
+            console.log('Texto a ser copiado:', textToCopy);
             // Copia o texto
             const tempInput = document.createElement('textarea');
             tempInput.value = textToCopy;
